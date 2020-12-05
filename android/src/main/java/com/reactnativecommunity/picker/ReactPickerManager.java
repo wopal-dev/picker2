@@ -8,6 +8,7 @@
 package com.reactnativecommunity.picker;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +83,16 @@ public abstract class ReactPickerManager extends SimpleViewManager<ReactPicker> 
   protected void onAfterUpdateTransaction(ReactPicker view) {
     super.onAfterUpdateTransaction(view);
     view.updateStagedSelection();
+  }
+
+  @Override
+  public void receiveCommand(ReactPicker root, int commandId, @Nullable ReadableArray args) {
+    Log.d("ReactNative", "ReactPickerManager receiveCommand called with commandId " + commandId);
+    super.receiveCommand(root, commandId, args);
+    // togglePicker command
+    if (commandId == 8080) {
+      root.performClick();
+    }
   }
 
   @Override
